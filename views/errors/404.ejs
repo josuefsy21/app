@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/assets/images/kiwi.ico" type="image/x-icon">
+  <title>404 - Page Not Found</title>
+  <style>
+    /* Reset & Variáveis no padrão Shadcn UI (Zinc/Slate theme) */
+    :root {
+      --background: #ffffff;
+      --foreground: #09090b;
+      --card: #ffffff;
+      --card-foreground: #09090b;
+      --muted: #f4f4f5;
+      --muted-foreground: #71717a;
+      --border: #e4e4e7;
+      --primary: #18181b;
+      --primary-foreground: #fafafa;
+      --secondary: #f4f4f5;
+      --secondary-foreground: #18181b;
+      --radius: 0.5rem;
+    }
+/*
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #09090b;
+        --foreground: #fafafa;
+        --card: #09090b;
+        --card-foreground: #fafafa;
+        --muted: #27272a;
+        --muted-foreground: #a1a1aa;
+        --border: #27272a;
+        --primary: #fafafa;
+        --primary-foreground: #18181b;
+        --secondary: #27272a;
+        --secondary-foreground: #fafafa;
+      }
+    }*/
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--background);
+      color: var(--foreground);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Card Component (Shadcn UI Style) */
+    .card {
+      background-color: var(--card);/*
+      border: 1px solid var(--border);
+      border-radius: var(--radius);*/
+      padding: 2.5rem 2rem;
+      max-width: 440px;
+      width: 100%;
+      /*box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);*/
+      text-align: center;
+    }
+
+    /* Badge Component */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      background-color: var(--muted);
+      color: var(--foreground);
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .badge-icon {
+      width: 0.875rem;
+      height: 0.875rem;
+    }
+
+    /* Typography */
+    .error-code {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .description {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      line-height: 1.5;
+      margin-bottom: 1.75rem;
+    }
+
+    /* Button Components */
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.625rem 1rem;
+      text-decoration: none;
+      transition: background-color 0.2s, opacity 0.2s;
+      cursor: pointer;
+      border: 1px solid transparent;
+      width: 100%;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--foreground);
+      border-color: var(--border);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <!-- Badge -->
+    <div class="badge">
+      <svg class="badge-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+Page Not Found
+    </div>
+
+    <h1 class="error-code">404</h1>
+    <h2 class="title">Non-existent Feature</h2>
+    
+    <p class="description">
+The address you tried to access does not exist, or it has been removed or temporarily changed.
+    </p>
+
+    <!-- Actions -->
+    <div class="button-group">
+      <button class="btn btn-outline" onclick="window.history.back()">
+        Go Back
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>
