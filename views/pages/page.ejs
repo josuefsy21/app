@@ -1,81 +1,666 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="shortcut icon" href="/images/kiwi.ico" type="image/x-icon">
-    <title>Kiwi blog&#8482</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Blog</title>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                background: #f8f9fb;
+                color: #111827;
+                line-height: 1.7;
+            }
+
+            .header {
+                height: 3.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 7%;
+                background: rgba(255, 255, 255, .9);
+                border-bottom: 1px solid #e5e7eb;
+                position: sticky;
+                top: 0;
+                z-index: 20;
+                backdrop-filter: blur(15px);
+            }
+
+            .logo {
+                display: flex;
+                align-items: center;
+                gap: 9px;
+                font-size: 16px;
+                font-weight: 800;
+                letter-spacing: .08em;
+            }
+
+            .login-btn {
+                border: none;
+                background: transparent;
+                color: #111827;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+            }
+
+            /* ARTICLE */
+            main {
+                max-width: 760px;
+                margin: auto;
+                padding: 70px 20px 100px;
+            }
+
+            .article {
+                position: relative;
+            }
+
+            .category {
+                display: inline-block;
+                font-size: 11px;
+                font-weight: 800;
+                letter-spacing: .12em;
+                color: #6366f1;
+                margin-bottom: 20px;
+            }
+
+            h1 {
+                font-size: clamp(36px, 6vw, 58px);
+                line-height: 1.08;
+                letter-spacing: -0.045em;
+                margin-bottom: 22px;
+            }
+
+            .subtitle {
+                font-size: 19px;
+                color: #6b7280;
+                margin-bottom: 30px;
+            }
+
+            /* AUTHOR & STORIES ANEL */
+            .author {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin-bottom: 45px;
+            }
+
+
+.avatar img{
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #e0e7ff;
+
+    display: grid;
+    place-items: center;
+
+    color: #4f46e5;
+
+    font-weight: 800;
+}
+
+
+            .author strong,
+            .author span {
+                display: block;
+            }
+
+            .author strong {
+                font-size: 14px;
+            }
+
+            .author span {
+                font-size: 12px;
+                color: #9ca3af;
+            }
+
+            .content {
+                font-size: 18px;
+            }
+
+            .content p {
+                margin-bottom: 24px;
+            }
+
+            .blurred-content {
+                position: relative;
+                max-height: 240px;
+                overflow: hidden;
+                margin-top: 20px;
+            }
+
+            .blurred-content::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 180px;
+                background: linear-gradient(to bottom, rgba(248, 249, 251, 0), #f8f9fb);
+            }
+
+            /* Paywall */
+            .paywall {
+                position: relative;
+                margin-top: -30px;
+                padding: 45px 35px 35px;
+                background: white;
+                border: 1px solid #e5e7eb;
+                border-radius: 24px;
+                box-shadow: 0 25px 70px rgba(17, 24, 39, .10);
+                text-align: center;
+                overflow: hidden;
+                z-index: 5;
+            }
+
+            .paywall-glow {
+                position: absolute;
+                width: 300px;
+                height: 300px;
+                top: -180px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #6366f1;
+                opacity: .08;
+                filter: blur(70px);
+                border-radius: 50%;
+            }
+
+            .lock {
+                width: 52px;
+                height: 52px;
+                margin: auto auto 18px;
+                border-radius: 15px;
+                background: #f3f4f6;
+                display: grid;
+                place-items: center;
+                font-size: 21px;
+            }
+
+            .premium-label {
+                font-size: 11px;
+                letter-spacing: .13em;
+                font-weight: 800;
+                color: #6366f1;
+            }
+
+            .paywall h2 {
+                margin-top: 10px;
+                font-size: 29px;
+                letter-spacing: -.025em;
+            }
+
+            .paywall-description {
+                max-width: 500px;
+                margin: 10px auto 25px;
+                color: #6b7280;
+                font-size: 15px;
+            }
+
+            .benefits {
+                display: grid;
+                gap: 10px;
+                text-align: left;
+                max-width: 410px;
+                margin: 0 auto 25px;
+            }
+
+            .benefit {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .benefit span {
+                width: 22px;
+                height: 22px;
+                display: grid;
+                place-items: center;
+                border-radius: 50%;
+                background: #ecfdf5;
+                color: #059669;
+                font-size: 12px;
+                font-weight: 800;
+            }
+
+            .benefit p {
+                font-size: 14px;
+            }
+
+            .pricing {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 15px;
+                margin: 25px 0;
+            }
+
+            .price {
+                text-align: left;
+            }
+
+            .price small {
+                display: block;
+                color: #9ca3af;
+                font-size: 11px;
+            }
+
+            .price strong {
+                font-size: 30px;
+                letter-spacing: -.04em;
+            }
+
+            .price span {
+                color: #6b7280;
+                font-size: 13px;
+            }
+
+            .trial {
+                background: #fef3c7;
+                color: #92400e;
+                padding: 7px 10px;
+                border-radius: 8px;
+                font-size: 11px;
+                font-weight: 800;
+            }
+
+            .cta {
+                width: 100%;
+                max-width: 430px;
+                border: none;
+                padding: 17px 20px;
+                border-radius: 12px;
+                background: #111827;
+                color: white;
+                font-size: 15px;
+                font-weight: 700;
+                cursor: pointer;
+                transition: .2s;
+            }
+
+            .cta:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 25px rgba(17, 24, 39, .20);
+            }
+
+            .trust {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 22px;
+            }
+
+            .avatars {
+                display: flex;
+            }
+
+            .avatars span {
+                width: 28px;
+                height: 28px;
+                margin-left: -5px;
+                display: grid;
+                place-items: center;
+                border: 2px solid white;
+                border-radius: 50%;
+                background: #e5e7eb;
+                font-size: 9px;
+                font-weight: 800;
+            }
+
+            .avatars span:first-child {
+                margin-left: 0;
+            }
+
+            .avatars img {
+                width: 28px;
+                height: 28px;
+                margin-left: -5px;
+                display: grid;
+                place-items: center;
+                border: 2px solid white;
+                border-radius: 50%;
+                background: #e5e7eb;
+                font-size: 9px;
+                font-weight: 800;
+            }
+
+            .avatars img:first-child {
+                margin-left: 0;
+            }
+
+            .trust strong,
+            .trust small {
+                display: block;
+                text-align: left;
+            }
+
+            .trust strong {
+                font-size: 11px;
+            }
+
+            .trust small {
+                color: #9ca3af;
+                font-size: 10px;
+            }
+
+            .secure {
+                margin-top: 18px;
+                color: #9ca3af;
+                font-size: 10px;
+            }
+   .faq {
+        margin-top: 60px;
+    }
+
+    .faq h3 {
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #111827;
+    }
+
+    .faq-item {
+        padding: 20px 0;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .faq-item:first-of-type {
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .faq-item h4 {
+        margin: 0 0 10px;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1.5;
+        color: #111827;
+    }
+
+    .faq-answer {
+        margin: 0;
+        color: #6b7280;
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+            .site-footer {
+                max-width: 760px;
+                margin: auto;
+                padding: 70px 20px 100px;
+                color: #6b7280;
+                font-size: 13px;
+            }
+
+            .footer-container {
+                max-width: 1100px;
+                margin: 0 auto;
+            }
+
+            .footer-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 30px;
+                margin-bottom: 30px;
+                text-align: left;
+            }
+
+            .footer-brand {
+                font-weight: 700;
+                font-size: 16px;
+                color: #111827;
+                display: block;
+            }
+
+            .footer-title {
+                font-weight: 600;
+                color: #374151;
+                display: block;
+                margin-bottom: 12px;
+            }
+
+            .footer-col ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .footer-col li {
+                margin-bottom: 8px;
+            }
+
+            .footer-col a {
+                color: #6b7280;
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+            .footer-col a:hover {
+                color: #6366f1;
+            }
+
+            .footer-desc {
+                padding-top: 10px;
+            }
+
+            .footer-desc,
+            .footer-info {
+                margin: 0 0 6px;
+                line-height: 1.4;
+            }
+
+            .footer-bottom {
+                text-align: center;
+                color: #9ca3af;
+                font-size: 12px;
+            }
+
+            footer {
+                text-align: center;
+                color: #9ca3af;
+                font-size: 12px;
+            }
+
+            @media (max-width: 700px) {
+                .container,
+                .narrow {
+                    width: min(100% - 28px, 850px);
+                }
+
+                .topbar .container {
+                    flex-direction: column;
+                    gap: 4px;
+                }
+
+                .hero {
+                    padding-top: 20px;
+                }
+
+                .hero h1 {
+                    font-size: 39px;
+                    letter-spacing: -1px;
+                }
+
+                .subtitle {
+                    font-size: 18px;
+                }
+
+                .image-placeholder {
+                    height: 280px;
+                }
+
+                .article p {
+                    font-size: 18px;
+                }
+
+                .article h2 {
+                    font-size: 29px;
+                    margin-top: 50px;
+                }
+
+                .lead {
+                    font-size: 22px !important;
+                }
+
+                .highlight {
+                    padding: 22px;
+                    font-size: 20px;
+                }
+
+                blockquote {
+                    font-size: 22px;
+                    padding: 25px 15px;
+                }
+
+                .mechanism {
+                    margin-left: -7px;
+                    margin-right: -7px;
+                    padding: 30px 20px;
+                }
+
+                .steps {
+                    grid-template-columns: 1fr;
+                    gap: 10px;
+                }
+
+                .offer {
+                    margin-left: -7px;
+                    margin-right: -7px;
+                    padding: 40px 20px;
+                }
+
+                .product-box {
+                    grid-template-columns: 1fr;
+                    gap: 25px;
+                }
+
+                .product-cover {
+                    width: 210px;
+                    margin: auto;
+                }
+
+                .final-cta {
+                    padding: 40px 20px;
+                }
+
+                .final-cta h2 {
+                    font-size: 29px;
+                }
+
+                footer .container {
+                    flex-direction: column;
+                }
+            }
+
+            @media (max-width: 640px) {
+                .footer-grid,
+                .footer-bottom {
+                    text-align: left;
+                }
+            }
+
+            @media (max-width: 600px) {
+                .header {
+                    padding: 0 20px;
+                }
+
+                main {
+                    padding-top: 45px;
+                }
+
+                h1 {
+                    font-size: 38px;
+                }
+
+                .subtitle {
+                    font-size: 17px;
+                }
+
+                .paywall {
+                    padding: 35px 20px 25px;
+                    border-radius: 20px;
+                }
+
+                .paywall h2 {
+                    font-size: 25px;
+                }
+
+                .pricing {
+                    flex-direction: column;
+                }
+                
+                .price {
+                    text-align: center;
+                }
+            }
+        
+* { box-sizing: border-box; } body {margin: 0;}*{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;box-sizing:border-box;}html{scroll-behavior:smooth;}body{font-family:Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;background-image:initial;background-position-x:initial;background-position-y:initial;background-size:initial;background-repeat:initial;background-attachment:initial;background-origin:initial;background-clip:initial;background-color:rgb(248, 249, 251);color:rgb(17, 24, 39);line-height:1.7;}.header{height:3.5rem;display:flex;align-items:center;justify-content:space-between;padding-top:0px;padding-right:7%;padding-bottom:0px;padding-left:7%;background-image:initial;background-position-x:initial;background-position-y:initial;background-size:initial;background-repeat:initial;background-attachment:initial;background-origin:initial;background-clip:initial;background-color:rgba(255, 255, 255, 0.9);border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:rgb(229, 231, 235);position:sticky;top:0px;z-index:20;backdrop-filter:blur(15px);}.logo{display:flex;align-items:center;row-gap:9px;column-gap:9px;font-size:16px;font-weight:800;letter-spacing:0.08em;}main{max-width:760px;margin-top:auto;margin-right:auto;margin-bottom:auto;margin-left:auto;padding-top:70px;padding-right:20px;padding-bottom:100px;padding-left:20px;}.article{position:relative;}.category{display:inline-block;font-size:11px;font-weight:800;letter-spacing:0.12em;color:rgb(99, 102, 241);margin-bottom:20px;}h1{font-size:clamp(36px, 6vw, 58px);line-height:1.08;letter-spacing:-0.045em;margin-bottom:22px;}.subtitle{font-size:19px;color:rgb(107, 114, 128);margin-bottom:30px;}.author{display:flex;align-items:center;row-gap:12px;column-gap:12px;margin-bottom:45px;}.avatar img{width:42px;height:42px;border-top-left-radius:50%;border-top-right-radius:50%;border-bottom-right-radius:50%;border-bottom-left-radius:50%;background-image:initial;background-position-x:initial;background-position-y:initial;background-size:initial;background-repeat:initial;background-attachment:initial;background-origin:initial;background-clip:initial;background-color:rgb(224, 231, 255);display:grid;align-items:center;justify-items:center;color:rgb(79, 70, 229);font-weight:800;}.author strong, .author span{display:block;}.author strong{font-size:14px;}.author span{font-size:12px;color:rgb(156, 163, 175);}.content{font-size:18px;}.content p{margin-bottom:24px;}.blurred-content{position:relative;max-height:240px;overflow-x:hidden;overflow-y:hidden;margin-top:20px;}.blurred-content::after{content:"";position:absolute;left:0px;right:0px;bottom:0px;height:180px;background-image:linear-gradient(rgba(248, 249, 251, 0), rgb(248, 249, 251));background-position-x:initial;background-position-y:initial;background-size:initial;background-repeat:initial;background-attachment:initial;background-origin:initial;background-clip:initial;background-color:initial;}.paywall{position:relative;margin-top:-30px;padding-top:45px;padding-right:35px;padding-bottom:35px;padding-left:35px;background-image:initial;background-position-x:initial;background-position-y:initial;background-size:initial;background-repeat:initial;background-attachment:initial;background-origin:initial;background-clip:initial;background-color:white;border-top-width:1px;border-right-width:1px;border-bottom-width:1px;border-left-width:1px;border-top-style:solid;border-right-style:solid;border-bottom-style:solid;border-left-style:solid;border-top-color:rgb(229, 231, 235);border-right-color:rgb(229, 231, 235);border-bottom-color:rgb(229, 231, 235);border-left-color:rgb(229, 231, 235);border-image-source:none;border-image-slice:100%;border-image-width:1;border-image-outset:0;border-image-repeat:stretch;border-top-left-radius:24px;border-top-right-radius:24px;border-bottom-right-radius:24px;border-bottom-left-radius:24px;box-shadow:rgba(17, 24, 39, 0.1) 0px 25px 70px;text-align:center;overflow-x:hidden;overflow-y:hidden;z-index:5;}.paywall-glow{position:absolute;width:300px;height:300px;top:-180px;left:50%;transform:translateX(-50%);background-image:initial;background-position-x:initial;background-position-y:initial;background-size:initial;background-repeat:initial;background-attachment:initial;background-origin:initial;background-clip:initial;background-color:rgb(99, 102, 241);opacity:0.08;filter:blur(70px);border-top-left-radius:50%;border-top-right-radius:50%;border-bottom-right-radius:50%;border-bottom-left-radius:50%;}.lock{width:52px;height:52px;margin-top:auto;margin-right:auto;margin-bottom:18px;margin-left:auto;border-top-left-radius:15px;border-top-right-radius:15px;border-bottom-right-radius:15px;border-bottom-left-radius:15px;background-image:initial;background-position-x:initial;background-position-y:initial;background-size:initial;background-repeat:initial;background-attachment:initial;background-origin:initial;background-clip:initial;background-color:rgb(243, 244, 246);display:grid;align-items:center;justify-items:center;font-size:21px;}.premium-label{font-size:11px;letter-spacing:0.13em;font-weight:800;color:rgb(99, 102, 241);}.paywall h2{margin-top:10px;font-size:29px;letter-spacing:-0.025em;}.paywall-description{max-width:500px;margin-top:10px;margin-right:auto;margin-bottom:25px;margin-left:auto;color:rgb(107, 114, 128);font-size:15px;}.benefits{display:grid;row-gap:10px;column-gap:10px;text-align:left;max-width:410px;margin-top:0px;margin-right:auto;margin-bottom:25px;margin-left:auto;}.benefit{display:flex;align-items:center;row-gap:10px;column-gap:10px;}.benefit span{width:22px;height:22px;display:grid;align-items:center;justify-items:center;border-top-left-radius:50%;border-top-right-radius:50%;border-bottom-right-radius:50%;border-bottom-left-radius:50%;background-image:initial;background-position-x:initial;background-position-y:initial;background-size:initial;background-repeat:initial;background-attachment:initial;background-origin:initial;background-clip:initial;background-color:rgb(236, 253, 245);color:rgb(5, 150, 105);font-size:12px;font-weight:800;}.benefit p{font-size:14px;}.pricing{display:flex;justify-content:center;align-items:center;row-gap:15px;column-gap:15px;margin-top:25px;margin-right:0px;margin-bottom:25px;margin-left:0px;}.price{text-align:left;}.price small{display:block;color:rgb(156, 163, 175);font-size:11px;}.price strong{font-size:30px;letter-spacing:-0.04em;}.price span{color:rgb(107, 114, 128);font-size:13px;}.trial{background-image:initial;background-position-x:initial;background-position-y:initial;background-size:initial;background-repeat:initial;background-attachment:initial;background-origin:initial;background-clip:initial;background-color:rgb(254, 243, 199);color:rgb(146, 64, 14);padding-top:7px;padding-right:10px;padding-bottom:7px;padding-left:10px;border-top-left-radius:8px;border-top-right-radius:8px;border-bottom-right-radius:8px;border-bottom-left-radius:8px;font-size:11px;font-weight:800;}.cta{width:100%;max-width:430px;border-top-width:medium;border-right-width:medium;border-bottom-width:medium;border-left-width:medium;border-top-style:none;border-right-style:none;border-bottom-style:none;border-left-style:none;border-top-color:currentcolor;border-right-color:currentcolor;border-bottom-color:currentcolor;border-left-color:currentcolor;border-image-source:none;border-image-slice:100%;border-image-width:1;border-image-outset:0;border-image-repeat:stretch;padding-top:17px;padding-right:20px;padding-bottom:17px;padding-left:20px;border-top-left-radius:12px;border-top-right-radius:12px;border-bottom-right-radius:12px;border-bottom-left-radius:12px;background-image:initial;background-position-x:initial;background-position-y:initial;background-size:initial;background-repeat:initial;background-attachment:initial;background-origin:initial;background-clip:initial;background-color:rgb(17, 24, 39);color:white;font-size:15px;font-weight:700;cursor:pointer;transition-behavior:normal;transition-duration:0.2s;transition-timing-function:ease;transition-delay:0s;transition-property:all;}.cta:hover{transform:translateY(-2px);box-shadow:rgba(17, 24, 39, 0.2) 0px 12px 25px;}.trust{display:flex;align-items:center;justify-content:center;row-gap:10px;column-gap:10px;margin-top:22px;}.avatars{display:flex;}.avatars span{width:28px;height:28px;margin-left:-5px;display:grid;align-items:center;justify-items:center;border-top-width:2px;border-right-width:2px;border-bottom-width:2px;border-left-width:2px;border-top-style:solid;border-right-style:solid;border-bottom-style:solid;border-left-style:solid;border-top-color:white;border-right-color:white;border-bottom-color:white;border-left-color:white;border-image-source:none;border-image-slice:100%;border-image-width:1;border-image-outset:0;border-image-repeat:stretch;border-top-left-radius:50%;border-top-right-radius:50%;border-bottom-right-radius:50%;border-bottom-left-radius:50%;background-image:initial;background-position-x:initial;background-position-y:initial;background-size:initial;background-repeat:initial;background-attachment:initial;background-origin:initial;background-clip:initial;background-color:rgb(229, 231, 235);font-size:9px;font-weight:800;}.avatars span:first-child{margin-left:0px;}.avatars img{width:28px;height:28px;margin-left:-5px;display:grid;align-items:center;justify-items:center;border-top-width:2px;border-right-width:2px;border-bottom-width:2px;border-left-width:2px;border-top-style:solid;border-right-style:solid;border-bottom-style:solid;border-left-style:solid;border-top-color:white;border-right-color:white;border-bottom-color:white;border-left-color:white;border-image-source:none;border-image-slice:100%;border-image-width:1;border-image-outset:0;border-image-repeat:stretch;border-top-left-radius:50%;border-top-right-radius:50%;border-bottom-right-radius:50%;border-bottom-left-radius:50%;background-image:initial;background-position-x:initial;background-position-y:initial;background-size:initial;background-repeat:initial;background-attachment:initial;background-origin:initial;background-clip:initial;background-color:rgb(229, 231, 235);font-size:9px;font-weight:800;}.avatars img:first-child{margin-left:0px;}.trust strong, .trust small{display:block;text-align:left;}.trust strong{font-size:11px;}.trust small{color:rgb(156, 163, 175);font-size:10px;}.secure{margin-top:18px;color:rgb(156, 163, 175);font-size:10px;}.faq{margin-top:60px;}.faq h3{margin-bottom:20px;font-size:20px;font-weight:700;color:rgb(17, 24, 39);}.faq-item{padding-top:20px;padding-right:0px;padding-bottom:20px;padding-left:0px;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:rgb(229, 231, 235);}.faq-item:first-of-type{border-top-width:1px;border-top-style:solid;border-top-color:rgb(229, 231, 235);}.faq-item h4{margin-top:0px;margin-right:0px;margin-bottom:10px;margin-left:0px;font-size:15px;font-weight:600;line-height:1.5;color:rgb(17, 24, 39);}.faq-answer{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;color:rgb(107, 114, 128);font-size:14px;line-height:1.7;}.site-footer{max-width:760px;margin-top:auto;margin-right:auto;margin-bottom:auto;margin-left:auto;padding-top:70px;padding-right:20px;padding-bottom:100px;padding-left:20px;color:rgb(107, 114, 128);font-size:13px;}.footer-container{max-width:1100px;margin-top:0px;margin-right:auto;margin-bottom:0px;margin-left:auto;}.footer-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));row-gap:30px;column-gap:30px;margin-bottom:30px;text-align:left;}.footer-brand{font-weight:700;font-size:16px;color:rgb(17, 24, 39);display:block;}.footer-title{font-weight:600;color:rgb(55, 65, 81);display:block;margin-bottom:12px;}.footer-col ul{list-style-position:initial;list-style-image:initial;list-style-type:none;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}.footer-col li{margin-bottom:8px;}.footer-col a{color:rgb(107, 114, 128);text-decoration-line:none;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;transition-behavior:normal;transition-duration:0.2s;transition-timing-function:ease;transition-delay:0s;transition-property:color;}.footer-col a:hover{color:rgb(99, 102, 241);}.footer-desc{padding-top:10px;}.footer-desc{margin-top:0px;margin-right:0px;margin-bottom:6px;margin-left:0px;line-height:1.4;}footer{text-align:center;color:rgb(156, 163, 175);font-size:12px;}@media (max-width: 700px){.topbar .container{flex-direction:column;row-gap:4px;column-gap:4px;}.hero h1{font-size:39px;letter-spacing:-1px;}.subtitle{font-size:18px;}.article p{font-size:18px;}.article h2{font-size:29px;margin-top:50px;}blockquote{font-size:22px;padding-top:25px;padding-right:15px;padding-bottom:25px;padding-left:15px;}.final-cta h2{font-size:29px;}footer .container{flex-direction:column;}}@media (max-width: 640px){.footer-grid{text-align:left;}}@media (max-width: 600px){.header{padding-top:0px;padding-right:20px;padding-bottom:0px;padding-left:20px;}main{padding-top:45px;}h1{font-size:38px;}.subtitle{font-size:17px;}.paywall{padding-top:35px;padding-right:20px;padding-bottom:25px;padding-left:20px;border-top-left-radius:20px;border-top-right-radius:20px;border-bottom-right-radius:20px;border-bottom-left-radius:20px;}.paywall h2{font-size:25px;}.pricing{flex-direction:column;}.price{text-align:center;}}
+    </style>
 </head>
-
 <body>
-    <header class="header">
-        <div class="logo">
-            <span class="logo-mark">
-                <img src="/images/kiwi.png" alt="" srcset="">
-            </span>
-            <span>Kiwi</span>
-        </div>
+<body id="ikgi"><header class="header"><div class="logo"><span id="iytm">Kiwi</span></div></header><main><section class="article"><div class="category">EXCLUSIVE GUIDE</div><h1>The simple strategy that can change the way you make decisions</h1><p class="subtitle">Discover the principles used by people who successfully turn information into better decisions.</p><!-- AUTHOR WITH STORIES RING --><div class="author"><div class="avatar"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWjgYGnKspjSvJ94hS5NnwlC8r8d2eaJsFInjC6HIvyw&amp;s=10" alt="Reader 2"/></div><div><strong id="iwv84">James Williams</strong><span>55 min read · Premium content</span></div></div><div class="content"><p>Making good decisions isn't just about having more information. In many cases, the real differentiator lies in how that information is organized.</p><p>For years, researchers and entrepreneurs have studied different ways to reduce impulsive decisions and improve the quality of outcomes.</p><div class="blurred-content"><p>There is one particularly interesting principle that can be applied to virtually any situation. It starts by breaking the problem down into three parts...</p><p>Once you identify these three variables, you can spot patterns that usually stay hidden.</p><p>From here, however, there is a sequence of steps that makes the method truly powerful...</p></div></div></section><!-- PAYWALL --><section class="paywall"><div class="paywall-glow"></div><div class="lock"><i class="ri-lock-line"></i></div><span class="premium-label">PREMIUM CONTENT</span><h2>Continue reading this article</h2><p class="paywall-description">Get full access to this article and all premium content on the platform.</p><div class="benefits"><div class="benefit"><span><i class="ri-check-line"></i></span><p>Full content and ad-free</p></div><div class="benefit"><span><i class="ri-check-line"></i></span><p>Access to exclusive content</p></div><div class="benefit"><span><i class="ri-check-line"></i></span><p>Cancel anytime</p></div></div><div class="pricing"><div class="price"><small>for only</small><div><strong id="ib92j">$ 27</strong><span id="ioomf">.90</span></div></div><div class="trial">One-time payment</div></div><button id="unlock-button" class="cta">Get started now <span><i class="ri-arrow-right-long-line"></i></span></button><div class="trust"><div class="avatars"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr1kaTfZqYPPmhvZV2Fp6uArQt_V0m5v4GEEZ9C9nImfm9rjM1wni521_k&amp;s=10" alt="Reader 1"/><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXOVbQdyNFQQnhuLlC4XWEzBVQOLgPnazDQX0E61010P46igY_kPF9CxTa&amp;s=10" alt="Reader 2"/><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz_Il9_sQMTNev-zMAl96wndecO1OizaCBlBLN6bQvxx1o9vpy9gBvIERs&amp;s=10" alt="Reader 3"/><span><i class="ri-add-line"></i></span></div><div><strong>Over 2,000 readers</strong><small>are already part of the community</small></div></div><div class="secure"><i class="ri-lock-fill"></i> Secure checkout · <b>Stripe</b></div></section><section class="faq"><h3>Still have questions?</h3><div class="faq-item"><h4>Can I cancel anytime?</h4><p class="faq-answer">
+                Yes. You can cancel your subscription at any time directly through your account.
+            </p></div><div class="faq-item"><h4>What's included?</h4><p class="faq-answer">
+                You will get full access to this article and all other premium content available on the platform.
+            </p></div><div class="faq-item"><h4>Is there a free trial?</h4><p class="faq-answer">
+                Yes. New subscribers can try it free for 7 days.
+            </p></div></section></main><footer class="site-footer"><div class="footer-container"><div class="footer-grid"><div class="footer-col"><div class="logo"><span class="footer-brand">kiwi</span></div><p class="footer-desc">Innovative solutions for your business.</p></div><div class="footer-col"><span class="footer-title">Legal</span><ul><li><a href="/terms">Terms of Service</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/refunds">Refund Policy</a></li></ul></div><div class="footer-col"><span class="footer-title">Support</span><ul><li>Contact Us</li><li><a href="mailto:support@yourdomain.com">support@yourdomain.com</a></li><li><span>+1 (800) 123-4567</span></li></ul></div></div><p id="i0p31l">© 2026 Kiwi™. All rights reserved.</p></div></footer></body>
+<script>
+const button = document.getElementById("unlock-button");
 
-        <a href="/" class="back-link">
-            <i class="ri-arrow-left-long-line"></i> Back to home
-        </a>
 
-    </header>
+if (button) {
+  button.addEventListener("click", async () => {
 
-    <main>
-        <section class="article">
-             <h1>Terms</h1>
-            <div class="content">
-                <p>Tomar boas decisões não depende apenas de possuir mais informações. Em muitos casos, o verdadeiro
-                    diferencial está na maneira como essas informações são organizadas.</p>
-                <p>Durante anos, pesquisadores e empreendedores estudaram diferentes formas de reduzir decisões
-                    impulsivas e aumentar a qualidade dos resultados boas decisões não depende apenas de possuir mais informações. Em muitos casos, o verdadeiro
-                    diferencial está na maneira como essas informações são organizadas.</p>
-                <p>Durante anos, pesquisadores e empreendedores estudaram diferentes formas de reduzir decisões
-                    impulsivas e aumentar a qualidade dos resultados.</p>
-                <p>Tomar boas decisões não depende apenas de possuir mais informações. Em muitos casos, o verdadeiro
-                    diferencial está na maneira como essas informações são organizadas.</p>
-                <p>Durante anos, pesquisadores e empreendedores estudaram diferentes formas de reduzir decisões
-                    impulsivas e aumentar a qualidade dos resultados.</p>
+    const originalText = button.innerHTML;
 
-            </div>
-        </section>
-    </main>
+    button.disabled = true;
+    button.innerHTML = "Loading...";
 
-    <footer class="site-footer">
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <div class="logo">
-                        <span class="logo-mark">
-                            <img src="/images/kiwi.png" alt="" srcset="">
-                        </span>
-                        <span class="footer-brand">Kiwi Blog&#8482</span>
-                    </div>
-                    <p class="footer-desc">Soluções inovadoras para o seu negócio.</p>
-                </div>
-                <div class="footer-col"><span class="footer-title">Legal</span>
-                    <ul>
-                        <li><a href="/terms">Termos de Serviço</a></li>
-                        <li><a href="/privacy">Política de Privacidade</a></li>
-                        <li><a href="/refunds">Política de Reembolso</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col"><span class="footer-title">Atendimento</span>
-                    <ul>
-                        <li>Fale Conosco</li>
-                        <li><a href="mailto:suporte@suadominio.com">suporte@suadominio.com</a></li>
-                        <li><span>+55 (11) 99999-9999</span></li>
-                    </ul>
-                </div>
-            </div>
-            <p>&copy; 2026 KIWI Blog&#8482. Todos os direitos reservados.</p>
-        </div>
-    </footer>
+    try {
+      const response = await fetch("/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        credentials: "include",
+      });
 
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Checkout error");
+      }
+
+      window.location.href = data.url;
+    } catch (error) {
+      console.error(error);
+      alert("");
+
+      button.disabled = false;
+      button.innerHTML = originalText;
+    }
+  });
+}
+        
+</script>
 </body>
-
 </html>
