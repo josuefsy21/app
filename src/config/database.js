@@ -1,33 +1,39 @@
 import 'dotenv/config';
 import pg from 'pg';
-import fs from "fs";
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const { Pool } = pg;
 
-const pool = new Pool({
-connectionString: process.env.DATABASE_URL
-    host: process.env.DB_HOST,
-    port: Number(process.env.DB_PORT || 5432),
-    database: process.env.DB_NAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
     max: Number(process.env.DB_POOL_MAX || 10),
     idleTimeoutMillis: 30_000,
-    connectionTimeoutMillis: 5_000
+    connectionTimeoutMillis: 5_000,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
-
-export default async function runMigrations() {
-  const sql = fs.readFileSync('./src/config/ddl.sql', 'utf8');
-  await pool.query(sql);
-}
 
 pool.on('error', (error) => {
-    console.error(
-        'Unexpected PostgreSQL pool error:',
-        error
-    );
+    console.error('Unexpected PostgreSQL pool error:', error);
 });
 
-export default pool;
+export async function runMigrations() {
+    const sqlPath = path.join(__dirname, 'ddl.sql');
+    const sql = await fs.readFile(sqlPath, 'utf8');
 
+    if (!sql.trim()) return;
+
+    await pool.query(sql);
+
+}
+
+export async function closeDatabase() {
+    await pool.end();
+}
+
+export default pool;
